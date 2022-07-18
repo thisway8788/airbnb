@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 18);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -264,9 +264,9 @@ process.umask = function() { return 0; };
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(30);
-} else {
   module.exports = __webpack_require__(29);
+} else {
+  module.exports = __webpack_require__(28);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -549,7 +549,7 @@ module.exports = ExecutionEnvironment;
  * 
  */
 
-var isTextNode = __webpack_require__(24);
+var isTextNode = __webpack_require__(23);
 
 /*eslint-disable no-bitwise */
 
@@ -775,9 +775,9 @@ module.exports = warning;
 var printWarning = function() {};
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactPropTypesSecret = __webpack_require__(25);
+  var ReactPropTypesSecret = __webpack_require__(24);
   var loggedTypeFailures = {};
-  var has = __webpack_require__(26);
+  var has = __webpack_require__(25);
 
   printWarning = function(text) {
     var message = 'Warning: ' + text;
@@ -879,6 +879,9 @@ module.exports = checkPropTypes;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports.default = App;
 
 var _react = __webpack_require__(1);
@@ -897,7 +900,7 @@ var _Card = __webpack_require__(14);
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _data = __webpack_require__(17);
+var _data = __webpack_require__(30);
 
 var _data2 = _interopRequireDefault(_data);
 
@@ -905,22 +908,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function App() {
   var cards = _data2.default.map(function (item) {
-    return _react2.default.createElement(_Card2.default, {
-      key: item.id,
-      img: item.coverImg,
-      rating: item.stats.rating,
-      reviewCount: item.stats.reviewCount,
-      location: item.location,
-      title: item.title,
-      price: item.price,
-      openSpots: item.openSpots
-    });
+    return _react2.default.createElement(_Card2.default, _extends({ key: item.id }, item));
   });
 
   return _react2.default.createElement(
     "div",
     null,
     _react2.default.createElement(_Navbar2.default, null),
+    _react2.default.createElement(_Hero2.default, null),
     _react2.default.createElement(
       "section",
       { className: "cards-list" },
@@ -968,9 +963,9 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(28);
-} else {
   module.exports = __webpack_require__(27);
+} else {
+  module.exports = __webpack_require__(26);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -993,21 +988,14 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Card(_ref) {
-  var img = _ref.img,
-      reviewCount = _ref.reviewCount,
-      location = _ref.location,
-      price = _ref.price,
-      title = _ref.title,
-      rating = _ref.rating,
-      openSpots = _ref.openSpots;
-
+function Card(props) {
   var badgeText = void 0;
-  if (openSpots === 0) {
+  if (props.openSpots === 0) {
     badgeText = "SOLD OUT";
-  } else if (location === "Online") {
+  } else if (props.location === "Online") {
     badgeText = "ONLINE";
   }
+
   return _react2.default.createElement(
     "div",
     { className: "card" },
@@ -1016,7 +1004,7 @@ function Card(_ref) {
       { className: "card--badge" },
       badgeText
     ),
-    _react2.default.createElement("img", { src: "../images/" + img, className: "card--image" }),
+    _react2.default.createElement("img", { src: "../images/" + props.coverImg, className: "card--image" }),
     _react2.default.createElement(
       "div",
       { className: "card--stats" },
@@ -1024,34 +1012,34 @@ function Card(_ref) {
       _react2.default.createElement(
         "span",
         null,
-        rating
+        props.stats.rating
       ),
       _react2.default.createElement(
         "span",
         { className: "gray" },
         "(",
-        reviewCount,
+        props.stats.reviewCount,
         ") \u2022 "
       ),
       _react2.default.createElement(
         "span",
         { className: "gray" },
-        location
+        props.location
       )
     ),
     _react2.default.createElement(
       "p",
-      null,
-      title
+      { className: "card--title" },
+      props.title
     ),
     _react2.default.createElement(
       "p",
-      null,
+      { className: "card--price" },
       _react2.default.createElement(
         "span",
         { className: "bold" },
         "From $",
-        price
+        props.price
       ),
       " / person"
     )
@@ -1127,54 +1115,6 @@ function Navbar() {
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = [{
-    id: 1,
-    title: "Life Lessons with Katie Zaferes",
-    description: "I will share with you what I call \"Positively Impactful Moments of Disappointment.\" Throughout my career, many of my highest moments only came after setbacks and losses. But learning from those difficult moments is what gave me the ability to rise above them and reach my goals.",
-    price: 136,
-    coverImg: "katie-zaferes.png",
-    stats: {
-        rating: 5.0,
-        reviewCount: 6
-    },
-    location: "Online",
-    openSpots: 0
-}, {
-    id: 2,
-    title: "Learn Wedding Photography",
-    description: "Interested in becoming a wedding photographer? For beginner and experienced photographers alike, join us in learning techniques required to leave the happy couple with memories that'll last a lifetime.",
-    price: 125,
-    coverImg: "wedding-photography.png",
-    stats: {
-        rating: 5.0,
-        reviewCount: 30
-    },
-    location: "Online",
-    openSpots: 27
-}, {
-    id: 3,
-    title: "Group Mountain Biking",
-    description: "Experience the beautiful Norwegian landscape and meet new friends all while conquering rugged terrain on your mountain bike. (Bike provided!)",
-    price: 50,
-    coverImg: "mountain-bike.png",
-    stats: {
-        rating: 4.8,
-        reviewCount: 2
-    },
-    location: "Norway",
-    openSpots: 3
-}];
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -1192,7 +1132,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById("root"));
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1227,7 +1167,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1242,7 +1182,7 @@ module.exports = camelize;
 
 
 
-var camelize = __webpack_require__(19);
+var camelize = __webpack_require__(18);
 
 var msPattern = /^-ms-/;
 
@@ -1270,7 +1210,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1306,7 +1246,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1321,7 +1261,7 @@ module.exports = hyphenate;
 
 
 
-var hyphenate = __webpack_require__(21);
+var hyphenate = __webpack_require__(20);
 
 var msPattern = /^ms-/;
 
@@ -1348,7 +1288,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1376,7 +1316,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1391,7 +1331,7 @@ module.exports = isNode;
  * @typechecks
  */
 
-var isNode = __webpack_require__(23);
+var isNode = __webpack_require__(22);
 
 /**
  * @param {*} object The object to check.
@@ -1404,7 +1344,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1423,14 +1363,14 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1462,8 +1402,8 @@ var getActiveElement = __webpack_require__(8);
 var shallowEqual = __webpack_require__(9);
 var containsNode = __webpack_require__(7);
 var emptyObject = __webpack_require__(3);
-var hyphenateStyleName = __webpack_require__(22);
-var camelizeStyleName = __webpack_require__(20);
+var hyphenateStyleName = __webpack_require__(21);
+var camelizeStyleName = __webpack_require__(19);
 
 // Relying on the `invariant()` implementation lets us
 // have preserve the format and params in the www builds.
@@ -18744,7 +18684,7 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18989,7 +18929,7 @@ var vi={default:qi},wi=vi&&qi||vi;module.exports=wi.default?wi.default:wi;
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20471,7 +20411,7 @@ module.exports = react;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20498,6 +20438,54 @@ _calculateChangedBits:b,_defaultValue:a,_currentValue:a,_currentValue2:a,_change
 b.key&&(g=""+b.key);var l=void 0;a.type&&a.type.defaultProps&&(l=a.type.defaultProps);for(c in b)K.call(b,c)&&!L.hasOwnProperty(c)&&(d[c]=void 0===b[c]&&void 0!==l?l[c]:b[c])}c=arguments.length-2;if(1===c)d.children=e;else if(1<c){l=Array(c);for(var m=0;m<c;m++)l[m]=arguments[m+2];d.children=l}return{$$typeof:t,type:a.type,key:g,ref:h,props:d,_owner:f}},createFactory:function(a){var b=M.bind(null,a);b.type=a;return b},isValidElement:N,version:"16.4.0",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentOwner:J,
 assign:k}},Y={default:X},Z=Y&&X||Y;module.exports=Z.default?Z.default:Z;
 
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = [{
+    id: 1,
+    title: "Life Lessons with Katie Zaferes",
+    description: "I will share with you what I call \"Positively Impactful Moments of Disappointment.\" Throughout my career, many of my highest moments only came after setbacks and losses. But learning from those difficult moments is what gave me the ability to rise above them and reach my goals.",
+    price: 136,
+    coverImg: "katie-zaferes.png",
+    stats: {
+        rating: 5.0,
+        reviewCount: 6
+    },
+    location: "Online",
+    openSpots: 0
+}, {
+    id: 2,
+    title: "Learn Wedding Photography",
+    description: "Interested in becoming a wedding photographer? For beginner and experienced photographers alike, join us in learning techniques required to leave the happy couple with memories that'll last a lifetime.",
+    price: 125,
+    coverImg: "wedding-photography.png",
+    stats: {
+        rating: 5.0,
+        reviewCount: 30
+    },
+    location: "Online",
+    openSpots: 27
+}, {
+    id: 3,
+    title: "Group Mountain Biking",
+    description: "Experience the beautiful Norwegian landscape and meet new friends all while conquering rugged terrain on your mountain bike. (Bike provided!)",
+    price: 50,
+    coverImg: "mountain-bike.png",
+    stats: {
+        rating: 4.8,
+        reviewCount: 2
+    },
+    location: "Norway",
+    openSpots: 3
+}];
 
 /***/ })
 /******/ ]);

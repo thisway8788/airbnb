@@ -1,17 +1,34 @@
-import React from "react"
+import React from "react";
 
-export default function Card(props) {
-    return (
-        <div className="card">
-            <img src={`../images/${props.img}`} className="card--image" />
-            <div className="card--stats">
-                <img src="../images/star.png" className="card--star" />
-                <span>{props.rating}</span>
-                <span className="gray">({props.reviewCount}) • </span>
-                <span className="gray">{props.location}</span>
-            </div>
-            <p>{props.title}</p>
-            <p><span className="bold">From ${props.price}</span> / person</p>
-        </div>
-    )
+export default function Card({
+  img,
+  reviewCount,
+  location,
+  price,
+  title,
+  rating,
+  openSpots,
+}) {
+  let badgeText;
+  if (openSpots === 0) {
+    badgeText = "SOLD OUT";
+  } else if (location === "Online") {
+    badgeText = "ONLINE";
+  }
+  return (
+    <div className="card">
+      {badgeText && <div className="card--badge">{badgeText}</div>}
+      <img src={`../images/${img}`} className="card--image" />
+      <div className="card--stats">
+        <img src="../images/star.png" className="card--star" />
+        <span>{rating}</span>
+        <span className="gray">({reviewCount}) • </span>
+        <span className="gray">{location}</span>
+      </div>
+      <p>{title}</p>
+      <p>
+        <span className="bold">From ${price}</span> / person
+      </p>
+    </div>
+  );
 }
